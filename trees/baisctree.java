@@ -21,7 +21,8 @@ public class baisctree {
 	
 	public static void main(String[] args) {
 		insert();
-		//printLeafroots(root);
+		insert(root, 80);
+		printLeafroots(root);
 		//preOrderRec(root);
 		//preOrderStk(root);
 		//inOrderRec(root);
@@ -224,4 +225,34 @@ public class baisctree {
 			res = right;
 		return res;
 	}
+	
+	//inserting an element into a tree
+	/*
+	 * If we find a node whose left child is empty, we make new key as left child 
+	 * of the node. Else if we find a node whose right child is empty, we make the
+	 *  new key as right child. We keep traversing the tree until we find a node
+	 *   whose either left or right child is empty. 
+	 */
+	public static void insert(treeroot temp, int key){
+        if (temp == null) {
+            root = new treeroot(key);
+            return;
+        }
+        Queue<treeroot> q = new LinkedList<treeroot>();
+        q.add(temp);
+        while (!q.isEmpty()) {
+            temp = q.peek();
+            q.remove();
+            if (temp.left == null) {
+                temp.left = new treeroot(key);
+                break;
+            } else
+                q.add(temp.left);
+            if (temp.right == null) {
+                temp.right = new treeroot(key);
+                break;
+            } else
+            	q.add(temp.right);
+        }
+    }
 }
